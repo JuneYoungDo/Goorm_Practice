@@ -1,0 +1,4 @@
+spring:
+  servlet:
+    multipart:
+      location: /Users/juneyoungdo/Desktop/Develop/Goorm/practice/chap06-file-upload-lecture-source
