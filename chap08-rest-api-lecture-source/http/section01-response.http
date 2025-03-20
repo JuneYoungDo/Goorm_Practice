@@ -1,0 +1,18 @@
+### GET request to example server
+GET http://127.0.0.1:8080/response/hello
+    ?generated-in=IntelliJ IDEA
+
+###
+GET http://127.0.0.1:8080/response/message
+
+###
+GET http://127.0.0.1:8080/response/list
+
+###
+GET http://127.0.0.1:8080/response/map
+
+###
+GET http://127.0.0.1:8080/response/image
+
+###
+GET http://127.0.0.1:8080/response/entity
