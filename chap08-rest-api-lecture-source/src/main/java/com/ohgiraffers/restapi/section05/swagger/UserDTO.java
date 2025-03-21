@@ -1,10 +1,15 @@
 package com.ohgiraffers.restapi.section05.swagger;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Date;
 
+@Schema(description = "회원 정보 DTO")
 public class UserDTO {
 
+    @Schema(description = "회원번호(PK)")
     private int number;
+
+    @Schema(description = "회원 ID")
     private String id;
     private String pwd;
     private String name;

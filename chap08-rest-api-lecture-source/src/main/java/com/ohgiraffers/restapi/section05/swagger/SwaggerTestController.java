@@ -1,5 +1,8 @@
 package com.ohgiraffers.restapi.section05.swagger;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.net.URI;
 import java.nio.charset.Charset;
@@ -41,6 +44,7 @@ public class SwaggerTestController {
         users.add(new UserDTO(3, "user03", "pass03", "너구리", new Date()));
     }
 
+    @Operation(summary = "전체 회원 조회", description = "전체 회원 목록을 조회한다.")
     @GetMapping("/users")
     public ResponseEntity<ResponseMessage> findAllUsers() {
         /* 응답 헤더 설정 */
@@ -56,6 +60,7 @@ public class SwaggerTestController {
         return new ResponseEntity<>(responseMessage, headers, HttpStatus.OK);
     }
 
+    @Operation(summary = "회원 번호로 회원 조회", description = "개별 회원을 조회한다.")
     @GetMapping("/users/{userNo}")
     public ResponseEntity<ResponseMessage> findUserByUserNo(@PathVariable("userNo") int userNo) {
         /* 응답 헤더 설정 */
@@ -72,6 +77,7 @@ public class SwaggerTestController {
             .body(new ResponseMessage(200, "조회 성공", responseMap));
     }
 
+    @Operation(summary = "신규 회원 등록")
     @PostMapping("/users")
     public ResponseEntity<?> registUser(@RequestBody UserDTO newUser) {
 
@@ -85,6 +91,7 @@ public class SwaggerTestController {
             URI.create("/entity/users/" + users.get(users.size() - 1).getNumber())).build();
     }
 
+    @Operation(summary = "회원 정보 수정")
     @PutMapping("/users/{userNo}")
     public ResponseEntity<?> modifyUser(@PathVariable("userNo") int userNo,
         @RequestBody UserDTO modifyInfo) {
@@ -99,6 +106,11 @@ public class SwaggerTestController {
         return ResponseEntity.created(URI.create("/entity/users/" + userNo)).build();
     }
 
+    @Operation(summary = "회원 정보 삭제")
+    @ApiResponses({
+        @ApiResponse(responseCode = "204", description = "회원 정보 삭제 성공"),
+        @ApiResponse(responseCode = "400", description = "잘못 입력된 파라미터")
+    })
     @DeleteMapping("/users/{userNo}")
     public ResponseEntity<?> removeUser(@PathVariable("userNo") int userNo) {
 
